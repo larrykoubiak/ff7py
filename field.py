@@ -204,7 +204,3 @@ opcodes = []
 for opcodedict in _opcodeslist:
     opcode = Opcode(**opcodedict)
     opcodes.append(opcode)
-
-if __name__ == '__main__':
-    f = Field.from_file("D:\\Temp\\Backup PSX\\ff7\\FIELD\\4SBWY_1.DAT")
-    print(f.script)
