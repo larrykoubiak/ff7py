@@ -1,9 +1,9 @@
-from construct import Adapter, Array,BitsInteger,BitStruct, Bytes, ExprAdapter, Flag, GreedyRange, Struct
+from construct import Adapter, Array,BitsInteger,BitStruct, ByteSwapped, ExprAdapter, Flag, GreedyRange, Struct
 from construct import Int8ul, Int16ul, Int32ul, this
 from dataclasses import dataclass, field
 from globals import lzs
-from PIL.Image import Image
-from PIL.ImagePalette import ImagePalette
+from PIL import Image
+from PIL import ImagePalette
 from typing import List, Optional
 
 @dataclass
@@ -11,7 +11,7 @@ class PaletteEntry:
     red: int
     green: int
     blue: int
-    stp: int
+    stp: bool
 
     def getColorData(self):
         return [self.red, self.green, self.blue]
@@ -22,7 +22,13 @@ class Palette:
     entries: List[PaletteEntry]
 
     def getImagePalette(self):
-        return ImagePalette(mode="rgb", palette=[e.getColorData for e in self.entries])
+        data  = [c for e in self.entries for c in e.getColorData() ]
+        pal = ImagePalette.ImagePalette(mode="rgb", palette=data)
+        return pal
+
+    def getTransparenctyIndexes(self):
+        indexes = [i for i in range(self.width) if self.entries[i].stp][0]
+        return indexes
 
 @dataclass
 class CLUT:
@@ -51,9 +57,16 @@ class MIM:
         mim = MIMStruct.parse_stream(stream)
         return cls(mim.clut, mim.textures)
 
-    def show_image(self, paletteId=0):
-        palette = self.clut.palettes[paletteId].getImagePalette()
-
+    def get_image_data(self, palette_id=0):
+        pal = self.clut.palettes[palette_id].getImagePalette()
+        img = Image.new(mode="P",size=(1280,512),color=0)
+        for t in self.textures:
+            data = bytes([byte for value in t.data for byte in value.to_bytes(2, byteorder='little')])
+            ti = Image.frombytes(mode="P", size=(t.width*2,t.height),data=data)
+            img.paste(ti,(t.x*2, t.y))
+        img.putpalette(pal)
+        img.info["transparency"] = self.clut.palettes[palette_id].getTransparenctyIndexes()
+        return img
 
 class CLUTAdapter(Adapter):
     def _decode(self, obj, context, path):
@@ -67,10 +80,10 @@ class CLUTAdapter(Adapter):
                     width=obj.width,
                     entries=[
                         PaletteEntry(
-                            red=e.red,
-                            green=e.green,
-                            blue=e.blue,
-                            stp=e.stp
+                            stp = e.stp > 0,
+                            blue = (e.blue << 3) + (e.blue >> 2),
+                            green = (e.green << 3) + (e.green >> 2),
+                            red = (e.red << 3) + (e.red >> 2)
                         ) for e in p
                     ]
                 ) for p in obj.palettes
@@ -97,12 +110,12 @@ CLUTStruct = CLUTAdapter(Struct(
         this.height,
         "palette" / Array(
             this.width,
-            "color" / BitStruct(
-                "red" / BitsInteger(5),
-                "green" / BitsInteger(5),
+            "color"/ ByteSwapped(BitStruct(
+                "stp" / BitsInteger(1),
                 "blue" / BitsInteger(5),
-                "stp" / Flag
-            )
+                "green" / BitsInteger(5),
+                "red" / BitsInteger(5),
+            ))
         )
     )
 ))
@@ -111,20 +124,15 @@ TextureStruct = TextureAdapter(Struct(
     "length" / Int32ul,
     "x" / Int16ul,
     "y" / Int16ul,
-    "width" / ExprAdapter(
-        Int16ul,
-        lambda obj, ctx: obj * 2,
-        lambda obj, ctx: obj / 2
-    ),
+    "width" / Int16ul,
     "height" / Int16ul,
-    "data" / Bytes(this.width)
+    "data" / Array(
+        lambda ctx: ctx.width * ctx.height,
+        Int16ul
+    )
 ))
 
 MIMStruct = Struct(
     "clut" / CLUTStruct,
     "textures" / GreedyRange(TextureStruct)
 )
-
-if __name__ == '__main__':
-    m = MIM.from_file(r'D:\PS1\ff7\FIELD\4SBWY_1.MIM')
-    print(m.textures)
