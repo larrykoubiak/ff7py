@@ -2750,7 +2750,7 @@
 			{
 				"name": "V",
 				"size": 8,
-				"description": " Value to be written/Source address."
+				"description": "Value to be written/Source address."
 			}
 		]
 	},
@@ -2799,7 +2799,6 @@
 				"description": "B Bank"
 			},
 			{
-				"name": "A",
 				"name": "A",
 				"size": 8,
 				"description": "Destination address"

@@ -1,9 +1,7 @@
 from json import dump
-from structs.field import Field
-from structs.entity import Entity, EntityScript
+from field import Field, Entity, EntityScript
 import tkinter as tk
 from tkinter import ttk, filedialog
-
 
 class FieldForm(tk.Tk):
     def __init__(self, screenName = None, baseName = None, className = "Tk", useTk = True, sync = False, use = None):
@@ -39,57 +37,92 @@ class FieldForm(tk.Tk):
         notebook.add(tilemap_tab, text="Tilemap")
 
     def buildScript(self, parent):
-        # Row 0: Header
+        """
+        Build the script UI using grid geometry. We remove hard-coded widths/heights and rely on grid weights to achieve proportional resizing.
+        """
+        parent.rowconfigure(0, weight=0)
+        parent.rowconfigure(1, weight=1)
+        parent.rowconfigure(2, weight=1)
+        parent.columnconfigure(0, weight=1)
+        # ──────────────────────────────────────────────────────────────────────
+        # Row 0: Header (Scale, Creator, Name)
+        # ──────────────────────────────────────────────────────────────────────
         row0 = ttk.Frame(parent)
-        row0.pack(fill="x", padx=5, pady=5)
-        ttk.Label(row0, text="Scale:").pack(side=tk.LEFT, padx=5)
+        row0.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
+        for col in range(6):
+            row0.columnconfigure(col, weight=1 if col % 2 == 1 else 0)
+        # Scale
+        ttk.Label(row0, text="Scale:").grid(row=0, column=0, sticky="w", padx=5)
         self.scale_var = tk.StringVar(value="")
-        tk.Entry(row0, textvariable=self.scale_var, width=15).pack(side=tk.LEFT)
-        ttk.Label(row0, text="Creator:").pack(side=tk.LEFT, padx=5)
+        tk.Entry(row0, textvariable=self.scale_var).grid(row=0, column=1, sticky="ew")
+        # Creator
+        ttk.Label(row0, text="Creator:").grid(row=0, column=2, sticky="w", padx=5)
         self.creator_var = tk.StringVar(value="")
-        tk.Entry(row0, textvariable=self.creator_var, width=30).pack(side=tk.LEFT)
-        ttk.Label(row0, text="Name:").pack(side=tk.LEFT, padx=5)
+        tk.Entry(row0, textvariable=self.creator_var).grid(row=0, column=3, sticky="ew")
+        # Name
+        ttk.Label(row0, text="Name:").grid(row=0, column=4, sticky="w", padx=5)
         self.name_var = tk.StringVar(value="")
-        tk.Entry(row0, textvariable=self.name_var, width=30).pack(side=tk.LEFT)
+        tk.Entry(row0, textvariable=self.name_var).grid(row=0, column=5, sticky="ew")
+        # ──────────────────────────────────────────────────────────────────────
         # Row 1: Dialogs
+        # ──────────────────────────────────────────────────────────────────────
         row1 = ttk.Frame(parent)
-        row1.pack(fill="x", padx=5, pady=5)
+        row1.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
+        row1.rowconfigure(0, weight=1)
+        row1.columnconfigure(0, weight=1)
         dialogs_frame = ttk.LabelFrame(row1, text="Dialogs")
-        dialogs_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5)
+        dialogs_frame.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
+        dialogs_frame.rowconfigure(0, weight=1)
+        dialogs_frame.columnconfigure(0, weight=1)  # Listbox
+        dialogs_frame.columnconfigure(1, weight=0)  # Scrollbar
+        dialogs_frame.columnconfigure(2, weight=2)  # Text gets more space
+        # Dialogs List + Scrollbar
         scrollDialog = tk.Scrollbar(dialogs_frame, orient=tk.VERTICAL)
-        scrollDialog.pack(side=tk.RIGHT, fill=tk.Y)
-        self.dialogs_list = tk.Listbox(dialogs_frame, width=20, height=8)
-        self.dialogs_list.pack(side=tk.LEFT,fill=tk.Y, expand=True)
+        scrollDialog.grid(row=0, column=1, sticky="ns")
+        self.dialogs_list = tk.Listbox(dialogs_frame, yscrollcommand=scrollDialog.set)
+        self.dialogs_list.grid(row=0, column=0, sticky="nsew")
         scrollDialog.config(command=self.dialogs_list.yview)
-        self.dialogs_list.config(yscrollcommand=scrollDialog.set)
         self.dialogs_list.bind("<<ListboxSelect>>", self.on_dialog_selected)
-        self.dialog_text = tk.Text(dialogs_frame, width=100, height= 8)
-        self.dialog_text.pack(side=tk.RIGHT,fill=tk.Y, expand=True)
-        # Row 2: Scripts
+        # Dialog Text
+        self.dialog_text = tk.Text(dialogs_frame)
+        self.dialog_text.grid(row=0, column=2, sticky="nsew")
+        # ──────────────────────────────────────────────────────────────────────
+        # Row 2: Scripts / Entities
+        # ──────────────────────────────────────────────────────────────────────
         row2 = ttk.Frame(parent)
-        row2.pack(fill=tk.BOTH, padx=5, pady=5)
+        row2.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
+        row2.rowconfigure(0, weight=1)
+        row2.columnconfigure(0, weight=1)
+        row2.columnconfigure(1, weight=2)
         entities_frame = ttk.LabelFrame(row2, text="Entities")
-        entities_frame.pack(side=tk.LEFT, fill=tk.Y, expand=True, padx=5)
+        entities_frame.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
+        entities_frame.rowconfigure(0, weight=1)
+        entities_frame.columnconfigure(0, weight=1)  # Listbox
+        entities_frame.columnconfigure(1, weight=0)  # Scrollbar
         scrollEntity = tk.Scrollbar(entities_frame, orient=tk.VERTICAL)
-        scrollEntity.pack(side=tk.RIGHT, fill=tk.Y)
-        self.entities_list = tk.Listbox(entities_frame, width=20, height=5)
-        self.entities_list.pack(fill=tk.Y, expand=True)
+        scrollEntity.grid(row=0, column=1, sticky="ns")
+        self.entities_list = tk.Listbox(
+            entities_frame, yscrollcommand=scrollEntity.set
+        )
+        self.entities_list.grid(row=0, column=0, sticky="nsew")
         scrollEntity.config(command=self.entities_list.yview)
-        self.entities_list.config(yscrollcommand=scrollEntity.set)
         self.entities_list.bind("<<ListboxSelect>>", self.on_entity_selected)
         entity_script_frame = ttk.LabelFrame(row2, text="Entity Scripts")
-        entity_script_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5)
-        self.entity_scripts_list = tk.Listbox(entity_script_frame, height=8, width=5)
-        self.entity_scripts_list.pack(side=tk.LEFT,fill=tk.BOTH, expand=True, padx=5)
+        entity_script_frame.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
+        entity_script_frame.rowconfigure(0, weight=1)
+        entity_script_frame.columnconfigure(0, weight=1)
+        entity_script_frame.columnconfigure(1, weight=2)
+        self.entity_scripts_list = tk.Listbox(entity_script_frame)
+        self.entity_scripts_list.grid(row=0, column=0, sticky="nsew", padx=5)
         self.entity_scripts_list.bind("<<ListboxSelect>>", self.on_entity_script_selected)
-        self.script_text = tk.Text(entity_script_frame, width=50, height= 8)
-        self.script_text.pack(side=tk.RIGHT,fill=tk.BOTH, expand=True)
+        self.script_text = tk.Text(entity_script_frame)
+        self.script_text.grid(row=0, column=1, sticky="nsew")
 
     def openfile(self):
         filepath = filedialog.askopenfilename(title="FF7 Field DAT", filetypes=[("DAT Files", "*.DAT")])
         if not filepath:
             return
-        self.field = Field(filepath)
+        self.field = Field.from_file(filepath)
         self.refresh()
 
     def savefile(self):
@@ -128,7 +161,7 @@ class FieldForm(tk.Tk):
         self.entity = self.field.script.entities[index]
         self.entity_scripts_list.delete(0, tk.END)
         for script in self.entity.scripts:
-            self.entity_scripts_list.insert(tk.END, str(script))
+            self.entity_scripts_list.insert(tk.END, f"Address {script.address}")
         self.script_text.delete(1.0, tk.END)
 
     def on_entity_script_selected(self, event):
@@ -139,7 +172,7 @@ class FieldForm(tk.Tk):
         index = selection[0]
         self.entity_script = self.entity.scripts[index]
         self.script_text.delete(1.0, tk.END)
-        for opcode in self.entity_script.opcodes:
+        for opcode in self.entity_script.instructions:
             self.script_text.insert(tk.END, str(opcode) + "\n")
 
 
