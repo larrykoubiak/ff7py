@@ -27,8 +27,8 @@ class Palette:
         return pal
 
     def getTransparenctyIndexes(self):
-        indexes = [i for i in range(self.width) if self.entries[i].stp][0]
-        return indexes
+        indexes = [i for i in range(self.width) if self.entries[i].stp]
+        return None if len(indexes) == 0 else indexes[0]
 
 @dataclass
 class CLUT:
@@ -65,7 +65,9 @@ class MIM:
             ti = Image.frombytes(mode="P", size=(t.width*2,t.height),data=data)
             img.paste(ti,(t.x*2, t.y))
         img.putpalette(pal)
-        img.info["transparency"] = self.clut.palettes[palette_id].getTransparenctyIndexes()
+        transparency = self.clut.palettes[palette_id].getTransparenctyIndexes()
+        if transparency is not None:
+            img.info["transparency"] = transparency
         return img
 
 class CLUTAdapter(Adapter):

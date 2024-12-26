@@ -1,7 +1,9 @@
 from json import dump
 from field import Field, Entity, EntityScript
+from mim import MIM
 import tkinter as tk
 from tkinter import ttk, filedialog
+from PIL import ImageTk, Image
 
 class FieldForm(tk.Tk):
     def __init__(self, screenName = None, baseName = None, className = "Tk", useTk = True, sync = False, use = None):
@@ -9,6 +11,8 @@ class FieldForm(tk.Tk):
         self.field: Field = None
         self.entity: Entity = None
         self.entity_script: EntityScript = None
+        self.mim: MIM = None
+        self.image: ImageTk.PhotoImage = None
         self.title("FF7 Field Editor")
         self.geometry("976x534")
         self.buildMenu() # Config Menu
@@ -32,6 +36,10 @@ class FieldForm(tk.Tk):
         # Mesh
         mesh_tab = ttk.Frame(notebook)
         notebook.add(mesh_tab, text="Mesh")
+        # MIM
+        mim_tab = ttk.Frame(notebook)
+        notebook.add(mim_tab, text="MIM")
+        self.buildMIM(tilemap_tab)
         #Tilemap
         tilemap_tab = ttk.Frame(notebook)
         notebook.add(tilemap_tab, text="Tilemap")
@@ -118,11 +126,18 @@ class FieldForm(tk.Tk):
         self.script_text = tk.Text(entity_script_frame)
         self.script_text.grid(row=0, column=1, sticky="nsew")
 
+    def buildMIM(self, parent):
+        self.mim_frame = ttk.Label(parent, image=self.image)
+        self.mim_frame.pack(fill=tk.BOTH, expand=True)
+        self.mim_frame.bind("<Configure>", self.on_label_resize)
+
     def openfile(self):
         filepath = filedialog.askopenfilename(title="FF7 Field DAT", filetypes=[("DAT Files", "*.DAT")])
         if not filepath:
             return
         self.field = Field.from_file(filepath)
+        mimfilepath = filepath.replace(".DAT",".MIM")
+        self.mim = MIM.from_file(mimfilepath)
         self.refresh()
 
     def savefile(self):
@@ -140,6 +155,9 @@ class FieldForm(tk.Tk):
         self.entities_list.delete(0, tk.END)
         for ent in self.field.script.entities:
             self.entities_list.insert(tk.END, ent.name)
+        original_image = self.mim.get_image_data(0)
+        self.image = ImageTk.PhotoImage(original_image)
+        self.mim_frame.config(image=self.image)
 
     def on_dialog_selected(self, event):
         selection = event.widget.curselection()
@@ -175,6 +193,14 @@ class FieldForm(tk.Tk):
         for opcode in self.entity_script.instructions:
             self.script_text.insert(tk.END, str(opcode) + "\n")
 
+    def on_label_resize(self, event):
+        new_width = event.width
+        new_height = event.height
+        if self.mim is not None:
+            original_image = self.mim.get_image_data(0)
+            new_image = original_image.resize((new_width, new_height),resample=Image.Resampling.NEAREST)
+            self.image = ImageTk.PhotoImage(new_image)
+            self.mim_frame.config(image=self.image)
 
 if __name__ == '__main__':
     app = FieldForm()
