@@ -1,0 +1,2018 @@
+[
+    {
+        "id": 0,
+        "name": "NOTE",
+        "longname": "Note C with length 192",
+        "description": ""
+    },
+    {
+        "id": 1,
+        "name": "NOTE",
+        "longname": "Note C with length 96",
+        "description": ""
+    },
+    {
+        "id": 2,
+        "name": "NOTE",
+        "longname": "Note C with length 48",
+        "description": ""
+    },
+    {
+        "id": 3,
+        "name": "NOTE",
+        "longname": "Note C with length 24",
+        "description": ""
+    },
+    {
+        "id": 4,
+        "name": "NOTE",
+        "longname": "Note C with length 12",
+        "description": ""
+    },
+    {
+        "id": 5,
+        "name": "NOTE",
+        "longname": "Note C with length 6",
+        "description": ""
+    },
+    {
+        "id": 6,
+        "name": "NOTE",
+        "longname": "Note C with length 3",
+        "description": ""
+    },
+    {
+        "id": 7,
+        "name": "NOTE",
+        "longname": "Note C with length 32",
+        "description": ""
+    },
+    {
+        "id": 8,
+        "name": "NOTE",
+        "longname": "Note C with length 16",
+        "description": ""
+    },
+    {
+        "id": 9,
+        "name": "NOTE",
+        "longname": "Note C with length 8",
+        "description": ""
+    },
+    {
+        "id": 10,
+        "name": "NOTE",
+        "longname": "Note C with length 4",
+        "description": ""
+    },
+    {
+        "id": 11,
+        "name": "NOTE",
+        "longname": "Note C# with length 192",
+        "description": ""
+    },
+    {
+        "id": 12,
+        "name": "NOTE",
+        "longname": "Note C# with length 96",
+        "description": ""
+    },
+    {
+        "id": 13,
+        "name": "NOTE",
+        "longname": "Note C# with length 48",
+        "description": ""
+    },
+    {
+        "id": 14,
+        "name": "NOTE",
+        "longname": "Note C# with length 24",
+        "description": ""
+    },
+    {
+        "id": 15,
+        "name": "NOTE",
+        "longname": "Note C# with length 12",
+        "description": ""
+    },
+    {
+        "id": 16,
+        "name": "NOTE",
+        "longname": "Note C# with length 6",
+        "description": ""
+    },
+    {
+        "id": 17,
+        "name": "NOTE",
+        "longname": "Note C# with length 3",
+        "description": ""
+    },
+    {
+        "id": 18,
+        "name": "NOTE",
+        "longname": "Note C# with length 32",
+        "description": ""
+    },
+    {
+        "id": 19,
+        "name": "NOTE",
+        "longname": "Note C# with length 16",
+        "description": ""
+    },
+    {
+        "id": 20,
+        "name": "NOTE",
+        "longname": "Note C# with length 8",
+        "description": ""
+    },
+    {
+        "id": 21,
+        "name": "NOTE",
+        "longname": "Note C# with length 4",
+        "description": ""
+    },
+    {
+        "id": 22,
+        "name": "NOTE",
+        "longname": "Note D with length 192",
+        "description": ""
+    },
+    {
+        "id": 23,
+        "name": "NOTE",
+        "longname": "Note D with length 96",
+        "description": ""
+    },
+    {
+        "id": 24,
+        "name": "NOTE",
+        "longname": "Note D with length 48",
+        "description": ""
+    },
+    {
+        "id": 25,
+        "name": "NOTE",
+        "longname": "Note D with length 24",
+        "description": ""
+    },
+    {
+        "id": 26,
+        "name": "NOTE",
+        "longname": "Note D with length 12",
+        "description": ""
+    },
+    {
+        "id": 27,
+        "name": "NOTE",
+        "longname": "Note D with length 6",
+        "description": ""
+    },
+    {
+        "id": 28,
+        "name": "NOTE",
+        "longname": "Note D with length 3",
+        "description": ""
+    },
+    {
+        "id": 29,
+        "name": "NOTE",
+        "longname": "Note D with length 32",
+        "description": ""
+    },
+    {
+        "id": 30,
+        "name": "NOTE",
+        "longname": "Note D with length 16",
+        "description": ""
+    },
+    {
+        "id": 31,
+        "name": "NOTE",
+        "longname": "Note D with length 8",
+        "description": ""
+    },
+    {
+        "id": 32,
+        "name": "NOTE",
+        "longname": "Note D with length 4",
+        "description": ""
+    },
+    {
+        "id": 33,
+        "name": "NOTE",
+        "longname": "Note D# with length 192",
+        "description": ""
+    },
+    {
+        "id": 34,
+        "name": "NOTE",
+        "longname": "Note D# with length 96",
+        "description": ""
+    },
+    {
+        "id": 35,
+        "name": "NOTE",
+        "longname": "Note D# with length 48",
+        "description": ""
+    },
+    {
+        "id": 36,
+        "name": "NOTE",
+        "longname": "Note D# with length 24",
+        "description": ""
+    },
+    {
+        "id": 37,
+        "name": "NOTE",
+        "longname": "Note D# with length 12",
+        "description": ""
+    },
+    {
+        "id": 38,
+        "name": "NOTE",
+        "longname": "Note D# with length 6",
+        "description": ""
+    },
+    {
+        "id": 39,
+        "name": "NOTE",
+        "longname": "Note D# with length 3",
+        "description": ""
+    },
+    {
+        "id": 40,
+        "name": "NOTE",
+        "longname": "Note D# with length 32",
+        "description": ""
+    },
+    {
+        "id": 41,
+        "name": "NOTE",
+        "longname": "Note D# with length 16",
+        "description": ""
+    },
+    {
+        "id": 42,
+        "name": "NOTE",
+        "longname": "Note D# with length 8",
+        "description": ""
+    },
+    {
+        "id": 43,
+        "name": "NOTE",
+        "longname": "Note D# with length 4",
+        "description": ""
+    },
+    {
+        "id": 44,
+        "name": "NOTE",
+        "longname": "Note E with length 192",
+        "description": ""
+    },
+    {
+        "id": 45,
+        "name": "NOTE",
+        "longname": "Note E with length 96",
+        "description": ""
+    },
+    {
+        "id": 46,
+        "name": "NOTE",
+        "longname": "Note E with length 48",
+        "description": ""
+    },
+    {
+        "id": 47,
+        "name": "NOTE",
+        "longname": "Note E with length 24",
+        "description": ""
+    },
+    {
+        "id": 48,
+        "name": "NOTE",
+        "longname": "Note E with length 12",
+        "description": ""
+    },
+    {
+        "id": 49,
+        "name": "NOTE",
+        "longname": "Note E with length 6",
+        "description": ""
+    },
+    {
+        "id": 50,
+        "name": "NOTE",
+        "longname": "Note E with length 3",
+        "description": ""
+    },
+    {
+        "id": 51,
+        "name": "NOTE",
+        "longname": "Note E with length 32",
+        "description": ""
+    },
+    {
+        "id": 52,
+        "name": "NOTE",
+        "longname": "Note E with length 16",
+        "description": ""
+    },
+    {
+        "id": 53,
+        "name": "NOTE",
+        "longname": "Note E with length 8",
+        "description": ""
+    },
+    {
+        "id": 54,
+        "name": "NOTE",
+        "longname": "Note E with length 4",
+        "description": ""
+    },
+    {
+        "id": 55,
+        "name": "NOTE",
+        "longname": "Note F with length 192",
+        "description": ""
+    },
+    {
+        "id": 56,
+        "name": "NOTE",
+        "longname": "Note F with length 96",
+        "description": ""
+    },
+    {
+        "id": 57,
+        "name": "NOTE",
+        "longname": "Note F with length 48",
+        "description": ""
+    },
+    {
+        "id": 58,
+        "name": "NOTE",
+        "longname": "Note F with length 24",
+        "description": ""
+    },
+    {
+        "id": 59,
+        "name": "NOTE",
+        "longname": "Note F with length 12",
+        "description": ""
+    },
+    {
+        "id": 60,
+        "name": "NOTE",
+        "longname": "Note F with length 6",
+        "description": ""
+    },
+    {
+        "id": 61,
+        "name": "NOTE",
+        "longname": "Note F with length 3",
+        "description": ""
+    },
+    {
+        "id": 62,
+        "name": "NOTE",
+        "longname": "Note F with length 32",
+        "description": ""
+    },
+    {
+        "id": 63,
+        "name": "NOTE",
+        "longname": "Note F with length 16",
+        "description": ""
+    },
+    {
+        "id": 64,
+        "name": "NOTE",
+        "longname": "Note F with length 8",
+        "description": ""
+    },
+    {
+        "id": 65,
+        "name": "NOTE",
+        "longname": "Note F with length 4",
+        "description": ""
+    },
+    {
+        "id": 66,
+        "name": "NOTE",
+        "longname": "Note F# with length 192",
+        "description": ""
+    },
+    {
+        "id": 67,
+        "name": "NOTE",
+        "longname": "Note F# with length 96",
+        "description": ""
+    },
+    {
+        "id": 68,
+        "name": "NOTE",
+        "longname": "Note F# with length 48",
+        "description": ""
+    },
+    {
+        "id": 69,
+        "name": "NOTE",
+        "longname": "Note F# with length 24",
+        "description": ""
+    },
+    {
+        "id": 70,
+        "name": "NOTE",
+        "longname": "Note F# with length 12",
+        "description": ""
+    },
+    {
+        "id": 71,
+        "name": "NOTE",
+        "longname": "Note F# with length 6",
+        "description": ""
+    },
+    {
+        "id": 72,
+        "name": "NOTE",
+        "longname": "Note F# with length 3",
+        "description": ""
+    },
+    {
+        "id": 73,
+        "name": "NOTE",
+        "longname": "Note F# with length 32",
+        "description": ""
+    },
+    {
+        "id": 74,
+        "name": "NOTE",
+        "longname": "Note F# with length 16",
+        "description": ""
+    },
+    {
+        "id": 75,
+        "name": "NOTE",
+        "longname": "Note F# with length 8",
+        "description": ""
+    },
+    {
+        "id": 76,
+        "name": "NOTE",
+        "longname": "Note F# with length 4",
+        "description": ""
+    },
+    {
+        "id": 77,
+        "name": "NOTE",
+        "longname": "Note G with length 192",
+        "description": ""
+    },
+    {
+        "id": 78,
+        "name": "NOTE",
+        "longname": "Note G with length 96",
+        "description": ""
+    },
+    {
+        "id": 79,
+        "name": "NOTE",
+        "longname": "Note G with length 48",
+        "description": ""
+    },
+    {
+        "id": 80,
+        "name": "NOTE",
+        "longname": "Note G with length 24",
+        "description": ""
+    },
+    {
+        "id": 81,
+        "name": "NOTE",
+        "longname": "Note G with length 12",
+        "description": ""
+    },
+    {
+        "id": 82,
+        "name": "NOTE",
+        "longname": "Note G with length 6",
+        "description": ""
+    },
+    {
+        "id": 83,
+        "name": "NOTE",
+        "longname": "Note G with length 3",
+        "description": ""
+    },
+    {
+        "id": 84,
+        "name": "NOTE",
+        "longname": "Note G with length 32",
+        "description": ""
+    },
+    {
+        "id": 85,
+        "name": "NOTE",
+        "longname": "Note G with length 16",
+        "description": ""
+    },
+    {
+        "id": 86,
+        "name": "NOTE",
+        "longname": "Note G with length 8",
+        "description": ""
+    },
+    {
+        "id": 87,
+        "name": "NOTE",
+        "longname": "Note G with length 4",
+        "description": ""
+    },
+    {
+        "id": 88,
+        "name": "NOTE",
+        "longname": "Note G# with length 192",
+        "description": ""
+    },
+    {
+        "id": 89,
+        "name": "NOTE",
+        "longname": "Note G# with length 96",
+        "description": ""
+    },
+    {
+        "id": 90,
+        "name": "NOTE",
+        "longname": "Note G# with length 48",
+        "description": ""
+    },
+    {
+        "id": 91,
+        "name": "NOTE",
+        "longname": "Note G# with length 24",
+        "description": ""
+    },
+    {
+        "id": 92,
+        "name": "NOTE",
+        "longname": "Note G# with length 12",
+        "description": ""
+    },
+    {
+        "id": 93,
+        "name": "NOTE",
+        "longname": "Note G# with length 6",
+        "description": ""
+    },
+    {
+        "id": 94,
+        "name": "NOTE",
+        "longname": "Note G# with length 3",
+        "description": ""
+    },
+    {
+        "id": 95,
+        "name": "NOTE",
+        "longname": "Note G# with length 32",
+        "description": ""
+    },
+    {
+        "id": 96,
+        "name": "NOTE",
+        "longname": "Note G# with length 16",
+        "description": ""
+    },
+    {
+        "id": 97,
+        "name": "NOTE",
+        "longname": "Note G# with length 8",
+        "description": ""
+    },
+    {
+        "id": 98,
+        "name": "NOTE",
+        "longname": "Note G# with length 4",
+        "description": ""
+    },
+    {
+        "id": 99,
+        "name": "NOTE",
+        "longname": "Note A with length 192",
+        "description": ""
+    },
+    {
+        "id": 100,
+        "name": "NOTE",
+        "longname": "Note A with length 96",
+        "description": ""
+    },
+    {
+        "id": 101,
+        "name": "NOTE",
+        "longname": "Note A with length 48",
+        "description": ""
+    },
+    {
+        "id": 102,
+        "name": "NOTE",
+        "longname": "Note A with length 24",
+        "description": ""
+    },
+    {
+        "id": 103,
+        "name": "NOTE",
+        "longname": "Note A with length 12",
+        "description": ""
+    },
+    {
+        "id": 104,
+        "name": "NOTE",
+        "longname": "Note A with length 6",
+        "description": ""
+    },
+    {
+        "id": 105,
+        "name": "NOTE",
+        "longname": "Note A with length 3",
+        "description": ""
+    },
+    {
+        "id": 106,
+        "name": "NOTE",
+        "longname": "Note A with length 32",
+        "description": ""
+    },
+    {
+        "id": 107,
+        "name": "NOTE",
+        "longname": "Note A with length 16",
+        "description": ""
+    },
+    {
+        "id": 108,
+        "name": "NOTE",
+        "longname": "Note A with length 8",
+        "description": ""
+    },
+    {
+        "id": 109,
+        "name": "NOTE",
+        "longname": "Note A with length 4",
+        "description": ""
+    },
+    {
+        "id": 110,
+        "name": "NOTE",
+        "longname": "Note A# with length 192",
+        "description": ""
+    },
+    {
+        "id": 111,
+        "name": "NOTE",
+        "longname": "Note A# with length 96",
+        "description": ""
+    },
+    {
+        "id": 112,
+        "name": "NOTE",
+        "longname": "Note A# with length 48",
+        "description": ""
+    },
+    {
+        "id": 113,
+        "name": "NOTE",
+        "longname": "Note A# with length 24",
+        "description": ""
+    },
+    {
+        "id": 114,
+        "name": "NOTE",
+        "longname": "Note A# with length 12",
+        "description": ""
+    },
+    {
+        "id": 115,
+        "name": "NOTE",
+        "longname": "Note A# with length 6",
+        "description": ""
+    },
+    {
+        "id": 116,
+        "name": "NOTE",
+        "longname": "Note A# with length 3",
+        "description": ""
+    },
+    {
+        "id": 117,
+        "name": "NOTE",
+        "longname": "Note A# with length 32",
+        "description": ""
+    },
+    {
+        "id": 118,
+        "name": "NOTE",
+        "longname": "Note A# with length 16",
+        "description": ""
+    },
+    {
+        "id": 119,
+        "name": "NOTE",
+        "longname": "Note A# with length 8",
+        "description": ""
+    },
+    {
+        "id": 120,
+        "name": "NOTE",
+        "longname": "Note A# with length 4",
+        "description": ""
+    },
+    {
+        "id": 121,
+        "name": "NOTE",
+        "longname": "Note B with length 192",
+        "description": ""
+    },
+    {
+        "id": 122,
+        "name": "NOTE",
+        "longname": "Note B with length 96",
+        "description": ""
+    },
+    {
+        "id": 123,
+        "name": "NOTE",
+        "longname": "Note B with length 48",
+        "description": ""
+    },
+    {
+        "id": 124,
+        "name": "NOTE",
+        "longname": "Note B with length 24",
+        "description": ""
+    },
+    {
+        "id": 125,
+        "name": "NOTE",
+        "longname": "Note B with length 12",
+        "description": ""
+    },
+    {
+        "id": 126,
+        "name": "NOTE",
+        "longname": "Note B with length 6",
+        "description": ""
+    },
+    {
+        "id": 127,
+        "name": "NOTE",
+        "longname": "Note B with length 3",
+        "description": ""
+    },
+    {
+        "id": 128,
+        "name": "NOTE",
+        "longname": "Note B with length 32",
+        "description": ""
+    },
+    {
+        "id": 129,
+        "name": "NOTE",
+        "longname": "Note B with length 16",
+        "description": ""
+    },
+    {
+        "id": 130,
+        "name": "NOTE",
+        "longname": "Note B with length 8",
+        "description": ""
+    },
+    {
+        "id": 131,
+        "name": "NOTE",
+        "longname": "Note B with length 4",
+        "description": ""
+    },
+    {
+        "id": 132,
+        "name": "TIE",
+        "longname": "Tie with length 192",
+        "description": ""
+    },
+    {
+        "id": 133,
+        "name": "TIE",
+        "longname": "Tie with length 96",
+        "description": ""
+    },
+    {
+        "id": 134,
+        "name": "TIE",
+        "longname": "Tie with length 48",
+        "description": ""
+    },
+    {
+        "id": 135,
+        "name": "TIE",
+        "longname": "Tie with length 24",
+        "description": ""
+    },
+    {
+        "id": 136,
+        "name": "TIE",
+        "longname": "Tie with length 12",
+        "description": ""
+    },
+    {
+        "id": 137,
+        "name": "TIE",
+        "longname": "Tie with length 6",
+        "description": ""
+    },
+    {
+        "id": 138,
+        "name": "TIE",
+        "longname": "Tie with length 3",
+        "description": ""
+    },
+    {
+        "id": 139,
+        "name": "TIE",
+        "longname": "Tie with length 32",
+        "description": ""
+    },
+    {
+        "id": 140,
+        "name": "TIE",
+        "longname": "Tie with length 16",
+        "description": ""
+    },
+    {
+        "id": 141,
+        "name": "TIE",
+        "longname": "Tie with length 8",
+        "description": ""
+    },
+    {
+        "id": 142,
+        "name": "TIE",
+        "longname": "Tie with length 4",
+        "description": ""
+    },
+    {
+        "id": 143,
+        "name": "REST",
+        "longname": "Rest with length 192",
+        "description": ""
+    },
+    {
+        "id": 144,
+        "name": "REST",
+        "longname": "Rest with length 96",
+        "description": ""
+    },
+    {
+        "id": 145,
+        "name": "REST",
+        "longname": "Rest with length 48",
+        "description": ""
+    },
+    {
+        "id": 146,
+        "name": "REST",
+        "longname": "Rest with length 24",
+        "description": ""
+    },
+    {
+        "id": 147,
+        "name": "REST",
+        "longname": "Rest with length 12",
+        "description": ""
+    },
+    {
+        "id": 148,
+        "name": "REST",
+        "longname": "Rest with length 6",
+        "description": ""
+    },
+    {
+        "id": 149,
+        "name": "REST",
+        "longname": "Rest with length 3",
+        "description": ""
+    },
+    {
+        "id": 150,
+        "name": "REST",
+        "longname": "Rest with length 32",
+        "description": ""
+    },
+    {
+        "id": 151,
+        "name": "REST",
+        "longname": "Rest with length 16",
+        "description": ""
+    },
+    {
+        "id": 152,
+        "name": "REST",
+        "longname": "Rest with length 8",
+        "description": ""
+    },
+    {
+        "id": 153,
+        "name": "REST",
+        "longname": "Rest with length 4",
+        "description": ""
+    },
+    {
+        "id": 154,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Should not be used."
+    },
+    {
+        "id": 155,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Should not be used."
+    },
+    {
+        "id": 156,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Should not be used."
+    },
+    {
+        "id": 157,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Should not be used."
+    },
+    {
+        "id": 158,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Should not be used."
+    },
+    {
+        "id": 159,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Should not be used."
+    },
+    {
+        "id": 160,
+        "name": "END",
+        "longname": "Finish Channel",
+        "description": ""
+    },
+    {
+        "id": 161,
+        "name": "PROGCHANGE",
+        "longname": "Load Instrument",
+        "description": "",
+        "operands": [
+            {
+                "name": "instrument",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 162,
+        "name": "ONE_TIME_DURATION",
+        "longname": "Overwrite Next Note Length",
+        "description": "Ignores the regular length (delta-time) of the next note and overwrites it with the specified length.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 163,
+        "name": "VOLUME",
+        "longname": "Channel Master Volume",
+        "description": "",
+        "operands": [
+            {
+                "name": "volume",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 164,
+        "name": "PITCH_SLIDE",
+        "longname": "Pitch Bend Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "semitones",
+                "size": "Bytewise(Int8sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 165,
+        "name": "OCTAVE",
+        "longname": "Set Octave",
+        "description": "",
+        "operands": [
+            {
+                "name": "octave",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 166,
+        "name": "INCREMENT_OCTAVE",
+        "longname": "Increase Octave",
+        "description": ""
+    },
+    {
+        "id": 167,
+        "name": "DECREMENT_OCTAVE",
+        "longname": "Decrease Octave",
+        "description": ""
+    },
+    {
+        "id": 168,
+        "name": "EXPRESSION",
+        "longname": "Channel Volume",
+        "description": "",
+        "operands": [
+            {
+                "name": "volume",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 169,
+        "name": "EXPRESSION_FADE",
+        "longname": "Channel Volume Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "volume",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 170,
+        "name": "PAN",
+        "longname": "Channel Pan",
+        "description": "64 is the center.",
+        "operands": [
+            {
+                "name": "pan",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 171,
+        "name": "PAN_FADE",
+        "longname": "Channel Pan Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "pan",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 172,
+        "name": "NOISE_CLOCK",
+        "longname": "Noise Clock Frequency",
+        "description": "",
+        "operands": [
+            {
+                "name": "clock",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 173,
+        "name": "ADSR_ATTACK_RATE",
+        "longname": "ADSR: Attack Rate",
+        "description": "",
+        "operands": [
+            {
+                "name": "attack_rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 174,
+        "name": "ADSR_DECAY_RATE",
+        "longname": "ADSR: Decay Rate",
+        "description": "",
+        "operands": [
+            {
+                "name": "decay_rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 175,
+        "name": "ADSR_SUSTAIN_LEVEL",
+        "longname": "ADSR: Sustain Level",
+        "description": "",
+        "operands": [
+            {
+                "name": "sustain_level",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 176,
+        "name": "ADSR_DECAY_RATE_AND_SUSTAIN_LEVEL",
+        "longname": "ADSR: Decay Rate & Sustain Level",
+        "description": "",
+        "operands": [
+            {
+                "name": "decay_rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "sustain_level",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 177,
+        "name": "ADSR_SUSTAIN_RATE",
+        "longname": "ADSR: Sustain Rate",
+        "description": "",
+        "operands": [
+            {
+                "name": "sustain_rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 178,
+        "name": "ADSR_RELEASE_RATE",
+        "longname": "ADSR: Release Rate",
+        "description": "",
+        "operands": [
+            {
+                "name": "release_rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 179,
+        "name": "RESET_ADSR",
+        "longname": "ADSR: Reset ADSR",
+        "description": ""
+    },
+    {
+        "id": 180,
+        "name": "VIBRATO",
+        "longname": "Vibrato (Channel Pitch LFO)",
+        "description": "When rate is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "delay",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "type",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 181,
+        "name": "VIBRATO_DEPTH",
+        "longname": "Vibrato Depth",
+        "description": "The most significant bit of the depth determines the amplitude range.\nWhen it is 0, the range is up to about +/- 50 cents (amplitude is 15/256 compared with range type 1).\nWhen it is 1, the range is up to about +/- 700 cents.",
+        "operands": [
+            {
+                "name": "depth",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 182,
+        "name": "VIBRATO_OFF",
+        "longname": "Turn Off Vibrato",
+        "description": ""
+    },
+    {
+        "id": 183,
+        "name": "ADSR_ATTACK_MODE",
+        "longname": "ADSR: Attack Mode",
+        "description": "",
+        "operands": [
+            {
+                "name": "attack_mode",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 184,
+        "name": "TREMOLO",
+        "longname": "Tremolo (Channel Volume LFO)",
+        "description": "When rate is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "delay",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "type",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 185,
+        "name": "TREMOLO_DEPTH",
+        "longname": "Tremolo Depth",
+        "description": "",
+        "operands": [
+            {
+                "name": "depth",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 186,
+        "name": "TREMOLO_OFF",
+        "longname": "Turn Off Tremolo",
+        "description": ""
+    },
+    {
+        "id": 187,
+        "name": "ADSR_SUSTAIN_MODE",
+        "longname": "ADSR: Sustain Mode",
+        "description": "",
+        "operands": [
+            {
+                "name": "sustain_mode",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 188,
+        "name": "PAN_LFO",
+        "longname": "Channel Pan LFO",
+        "description": "When rate is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "type",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 189,
+        "name": "PAN_LFO_DEPTH",
+        "longname": "Channel Pan LFO Depth",
+        "description": "",
+        "operands": [
+            {
+                "name": "depth",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 190,
+        "name": "PAN_LFO_OFF",
+        "longname": "Turn Off Channel Pan LFO",
+        "description": ""
+    },
+    {
+        "id": 191,
+        "name": "ADSR_RELEASE_MODE",
+        "longname": "ADSR: Release Mode",
+        "description": "",
+        "operands": [
+            {
+                "name": "release_mode",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 192,
+        "name": "TRANSPOSE_ABS",
+        "longname": "Channel Transpose (Absolute)",
+        "description": "",
+        "operands": [
+            {
+                "name": "semitones",
+                "size": "Bytewise(Int8sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 193,
+        "name": "TRANSPOSE_REL",
+        "longname": "Channel Transpose (Relative)",
+        "description": "",
+        "operands": [
+            {
+                "name": "semitones",
+                "size": "Bytewise(Int8sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 194,
+        "name": "REVERB_ON",
+        "longname": "Turn On Reverb",
+        "description": ""
+    },
+    {
+        "id": 195,
+        "name": "REVERB_OFF",
+        "longname": "Turn Off Reverb",
+        "description": ""
+    },
+    {
+        "id": 196,
+        "name": "NOISE_ON",
+        "longname": "Turn On Noise",
+        "description": ""
+    },
+    {
+        "id": 197,
+        "name": "NOISE_OFF",
+        "longname": "Turn Off Noise",
+        "description": ""
+    },
+    {
+        "id": 198,
+        "name": "PITCH_MOD_ON",
+        "longname": "Turn On Frequency Modulation",
+        "description": ""
+    },
+    {
+        "id": 199,
+        "name": "PITCH_MOD_OFF",
+        "longname": "Turn Off Frequency Modulation",
+        "description": ""
+    },
+    {
+        "id": 200,
+        "name": "LOOP_START",
+        "longname": "Loop Point",
+        "description": "Remember the current offset as a loop point and increase the nesting level of the loop."
+    },
+    {
+        "id": 201,
+        "name": "LOOP_UNTIL",
+        "longname": "Return to Loop Point Up to N Times",
+        "description": "On the Nth repeat, this instruction will end the current loop by decrementing the nesting level of the loop. Otherwise, it will increment the loop counter and return to the loop point.\nWhen times is 0, it will be translated to 256 times.",
+        "operands": [
+            {
+                "name": "times",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 202,
+        "name": "LOOP_AGAIN",
+        "longname": "Return to Loop Point",
+        "description": "This instruction will increment the loop counter."
+    },
+    {
+        "id": 203,
+        "name": "RESET_VOICE_EFFECTS",
+        "longname": "Reset Sound Effects",
+        "description": "Reset sound effects such as noise, frequency modulation, reverb, overlay voice and alternate voice."
+    },
+    {
+        "id": 204,
+        "name": "SLUR_ON",
+        "longname": "Turn On Legato",
+        "description": "This instruction will stop the regular key on and key off performance of the subsequent notes and update the pitch only."
+    },
+    {
+        "id": 205,
+        "name": "SLUR_OFF",
+        "longname": "Turn Off Legato",
+        "description": ""
+    },
+    {
+        "id": 206,
+        "name": "NOISE_ON_DELAY_TOGGLE",
+        "longname": "Turn On Noise and Toggle Noise On/Off after a Period of Time",
+        "description": "When delay is 0, it will be translated to 257 ticks.",
+        "operands": [
+            {
+                "name": "delay",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 207,
+        "name": "NOISE_DELAY_TOGGLE",
+        "longname": "Toggle Noise On/Off after a Period of Time",
+        "description": "When delay is 0, it will be translated to 257 ticks.",
+        "operands": [
+            {
+                "name": "delay",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 208,
+        "name": "LEGATO_ON",
+        "longname": "Turn On Full-Length Note Mode",
+        "description": "This instruction will stop the regular key off performance of the subsequent notes."
+    },
+    {
+        "id": 209,
+        "name": "LEGATO_OFF",
+        "longname": "Turn Off Full-Length Note Mode",
+        "description": ""
+    },
+    {
+        "id": 210,
+        "name": "PITCH_MOD_ON_DELAY_TOGGLE",
+        "longname": "Turn On Frequency Modulation and Toggle Frequency Modulation On/Off after a Period of Time",
+        "description": "When delay is 0, it will be translated to 257 ticks.",
+        "operands": [
+            {
+                "name": "delay",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 211,
+        "name": "PITCH_MOD_DELAY_TOGGLE",
+        "longname": "Toggle Frequency Modulation On/Off after a Period of Time",
+        "description": "When delay is 0, it will be translated to 257 ticks.",
+        "operands": [
+            {
+                "name": "delay",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 212,
+        "name": "PITCH_SIDE_CHAIN_ON",
+        "longname": "Turn On Playback Rate Side Chain",
+        "description": "Duplicate and use the playback frequency of the previous voice channel."
+    },
+    {
+        "id": 213,
+        "name": "PITCH_SIDE_CHAIN_OFF",
+        "longname": "Turn Off Playback Rate Side Chain",
+        "description": ""
+    },
+    {
+        "id": 214,
+        "name": "PITCH_TO_VOLUME_SIDE_CHAIN_ON",
+        "longname": "Turn On Pitch-Volume Side Chain",
+        "description": "Multiply the playback frequency of the previous voice channel to the output volume. Lower pitch will make the volume smaller."
+    },
+    {
+        "id": 215,
+        "name": "PITCH_TO_VOLUME_SIDE_CHAIN_OFF",
+        "longname": "Turn Off Pitch-Volume Side Chain",
+        "description": ""
+    },
+    {
+        "id": 216,
+        "name": "TUNING_ABS",
+        "longname": "Channel Fine Tuning (Absolute)",
+        "description": "The pitch can be changed in the range of one octave above and below.\nThe amount is the multiplicand for the playback frequency, not a log-based parameter like cents. For example, when the amount is 127, the pitch will be multiplied by 127/128 (about +1 octave). Negative value will lower the pitch.",
+        "operands": [
+            {
+                "name": "amount",
+                "size": "Bytewise(Int8sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 217,
+        "name": "TUNING_REL",
+        "longname": "Channel Fine Tuning (Relative)",
+        "description": "The amount will be added to the current tuning amount.",
+        "operands": [
+            {
+                "name": "amount",
+                "size": "Bytewise(Int8sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 218,
+        "name": "PORTAMENTO_ON",
+        "longname": "Turn On Portamento",
+        "description": "When speed is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "speed",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 219,
+        "name": "PORTAMENTO_OFF",
+        "longname": "Turn Off Portamento",
+        "description": ""
+    },
+    {
+        "id": 220,
+        "name": "FIXED_DURATION",
+        "longname": "Fix Note Length",
+        "description": "Ignore the regular length (delta-time) of subsequent notes and set to the fixed length. The length_to_add parameter will be added to the current length value. (the initial value is 0)",
+        "operands": [
+            {
+                "name": "length_to_add",
+                "size": "Bytewise(Int8sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 221,
+        "name": "VIBRATO_DEPTH_FADE",
+        "longname": "Vibrato Depth Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "depth",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 222,
+        "name": "TREMOLO_DEPTH_FADE",
+        "longname": "Tremolo Depth Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "depth",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 223,
+        "name": "PAN_LFO_FADE",
+        "longname": "Channel Pan LFO Depth Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "depth",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 224,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 225,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 226,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 227,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 228,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 229,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 230,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 231,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 232,
+        "name": "TEMPO",
+        "longname": "Tempo",
+        "description": "bpm = tempo / 214.998204 (approximate)\nMore strictly, bpm = 60.0 / (48 * (65536.0 / tempo) * (0x44E8 / (33868800.0 / 8)))\nNote that this coefficient is different from other games with PlayStation AKAO.",
+        "operands": [
+            {
+                "name": "tempo",
+                "size": "Bytewise(Int16ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 233,
+        "name": "TEMPO_FADE",
+        "longname": "Tempo Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "tempo",
+                "size": "Bytewise(Int16ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 234,
+        "name": "REVERB_DEPTH",
+        "longname": "Reverb Depth",
+        "description": "",
+        "operands": [
+            {
+                "name": "depth",
+                "size": "Bytewise(Int16ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 235,
+        "name": "REVERB_DEPTH_FADE",
+        "longname": "Reverb Depth Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 236,
+        "name": "DRUM_ON_V1",
+        "longname": "Turn On Drum Mode",
+        "description": "The drum_map_offset is a relative offset pointing to the drum instrument map table, which determines the instrument for each keys.",
+        "operands": [
+            {
+                "name": "drum_map_offset",
+                "size": "Bytewise(Int16sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 237,
+        "name": "DRUM_OFF",
+        "longname": "Turn Off Drum Mode",
+        "description": ""
+    },
+    {
+        "id": 238,
+        "name": "UNCONDITIONAL_JUMP",
+        "longname": "Unconditional Jump",
+        "description": "This instruction can be used to make an infinite loop.",
+        "operands": [
+            {
+                "name": "destination_offset",
+                "size": "Bytewise(Int16sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 239,
+        "name": "CPU_CONDITIONAL_JUMP",
+        "longname": "CPU-Conditional Jump",
+        "description": "Jump if the condition variable matches condition. The value of the condition variable can be set from the game program.",
+        "operands": [
+            {
+                "name": "condition",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "destination_offset",
+                "size": "Bytewise(Int16sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 240,
+        "name": "LOOP_BRANCH",
+        "longname": "Jump on the Nth Repeat",
+        "description": "When times is 0, it will be translated to 256 times.",
+        "operands": [
+            {
+                "name": "times",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "destination_offset",
+                "size": "Bytewise(Int16sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 241,
+        "name": "LOOP_BREAK",
+        "longname": "Break the Loop on the Nth Repeat",
+        "description": "Unlike 0xF0, this instruction will end the current loop by decrementing the nesting level of the loop.\nWhen times is 0, it will be translated to 256 times.",
+        "operands": [
+            {
+                "name": "times",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "destination_offset",
+                "size": "Bytewise(Int16sl)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 242,
+        "name": "PROGCHANGE_NO_ATTACK",
+        "longname": "Load Instrument (No Attack Sample)",
+        "description": "Unlike 0xA1, the sample before the loop point is replaced by a short, silence sample.",
+        "operands": [
+            {
+                "name": "instrument",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 243,
+        "name": "F3_FF7",
+        "longname": "Unknown",
+        "description": "There is no actual use in music."
+    },
+    {
+        "id": 244,
+        "name": "OVERLAY_VOICE_ON",
+        "longname": "Turn On Overlay Voice",
+        "description": "Play the same melody by different instruments on two voice channels. A free voice channel is required to work. Note that the two channels share the playback rate, and the pitch is not calculated for each instruments.\nUsed in the song \"Anxious Heart\".",
+        "operands": [
+            {
+                "name": "instrument",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "instrument2",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 245,
+        "name": "OVERLAY_VOICE_OFF",
+        "longname": "Turn Off Overlay Voice",
+        "description": ""
+    },
+    {
+        "id": 246,
+        "name": "OVERLAY_VOLUME_BALANCE",
+        "longname": "Overlay Volume Balance",
+        "description": "When the balance is 0, the volume of the primary voice will be 100% (127/128) of original and that of the secondary voice will be 0%. 127 is the opposite.",
+        "operands": [
+            {
+                "name": "balance",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 247,
+        "name": "OVERLAY_VOLUME_BALANCE_FADE",
+        "longname": "Overlay Volume Balance Slide",
+        "description": "When length is 0, it will be translated to 256 ticks.",
+        "operands": [
+            {
+                "name": "length",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "balance",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 248,
+        "name": "ALTERNATE_VOICE_ON",
+        "longname": "Turn On Alternate Voice",
+        "description": "This instruction allows subsequent notes to be played on two alternating channels. At the same time, the ADSR release rate will be set to the specified value. A free voice channel is required to work.\nCheck \"Opening - Bombing Mission\", \"Tifa's Theme\" and \"Fortress of the Condor\" for actual usage.",
+        "operands": [
+            {
+                "name": "release_rate",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 249,
+        "name": "ALTERNATE_VOICE_OFF",
+        "longname": "Turn Off Alternate Voice",
+        "description": ""
+    },
+    {
+        "id": 250,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 251,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 252,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    },
+    {
+        "id": 253,
+        "name": "TIME_SIGNATURE",
+        "longname": "Time Signature",
+        "description": "Note that two parameters can be 0. This pattern is used for initialization.",
+        "operands": [
+            {
+                "name": "ticks_per_beat",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            },
+            {
+                "name": "beats_per_measure",
+                "size": "Bytewise(Int8ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 254,
+        "name": "MEASURE",
+        "longname": "Measure Number",
+        "description": "",
+        "operands": [
+            {
+                "name": "measure",
+                "size": "Bytewise(Int16ul)",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 255,
+        "name": "UNIMPLEMENTED",
+        "longname": "Unimplemented",
+        "description": "Code-referenced to 0xA0. Should not be used."
+    }
+]

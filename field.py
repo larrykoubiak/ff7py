@@ -1,8 +1,9 @@
-from construct import Adapter, Array,BitsInteger,BitStruct, Byte, Bytes, Computed, ExprAdapter, Padding, PaddedString, Pointer, RepeatUntil, Struct, Tell
+from akao import AKAO, AKAOStruct, AKAOAdapter
+from construct import Adapter, Array,Byte, ExprAdapter, Padding, PaddedString, Pointer, RepeatUntil, Struct, Tell
 from construct import Int8ul, Int16ul, Int32ul, this
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import IntEnum
-from json import load
+from opcodes import Opcode, FieldOpcodeConstruct
 from typing import List, Optional
 from globals import lzs
 from utils.ff7text import FF7Text
@@ -15,44 +16,6 @@ class FieldOffset(IntEnum):
     TRIGGERS = 4
     ENCOUNTER = 5
     MODEL = 6
-
-@dataclass
-class Operand:
-    name: str = ''
-    description: str = ''
-    size: int = 0
-    value: Optional[str] = None
-
-    def __repr__(self) -> str:
-        return f"{self.name}:={self.value}"
-
-@dataclass
-class Opcode:
-    id: int = 0
-    name: str = ''
-    longname: str = ''
-    description: str = ''
-    operands: List[Operand] = field(default_factory=list)
-
-    def __post_init__(self):
-        objlist = [Operand(**operand) if isinstance(operand, dict) else operand for operand in self.operands]
-        self.operands = objlist[:]
-
-    @property
-    def size(self) -> int:
-        return sum(operand.size for operand in self.operands)
-
-    @property
-    def bitstruct(self):
-        fields = [(o.name / BitsInteger(o.size)) for o in self.operands]
-        return BitStruct(*fields)
-
-    def __repr__(self) -> str:
-        str_repr = f"{self.name} "
-        if self.operands:
-            operand_strs = ', '.join(str(operand) for operand in self.operands)
-            str_repr += f"({operand_strs})"
-        return str_repr
 
 @dataclass
 class EntityScript:
@@ -69,30 +32,9 @@ class Script:
     scale: int
     creator: str
     name: str
-    entities: List[str]
+    akaos: List[AKAO]
+    entities: List[Entity]
     dialogs: List[str]
-
-class EntityScriptAdapter(Adapter):
-    def _decode(self, obj, context, path):
-        return EntityScript(
-            address=obj.offset,
-            instructions=[
-                Opcode(
-                    id = opcodes[o.opcode].id,
-                    name = opcodes[o.opcode].name,
-                    longname= opcodes[o.opcode].longname,
-                    description=opcodes[o.opcode].description,
-                    operands=[
-                        Operand(
-                            name=opcodes[o.opcode].operands[i].name,
-                            description=opcodes[o.opcode].operands[i].description,
-                            size=opcodes[o.opcode].operands[i].size,
-                            value=o.operands[opcodes[o.opcode].operands[i].name]
-                        ) for i in range(len(opcodes[o.opcode].operands))
-                    ]
-                ) for o in obj.entries
-            ]
-        )
 
 class ScriptAdapter(Adapter):
     def _decode(self, obj, context, path):
@@ -100,10 +42,11 @@ class ScriptAdapter(Adapter):
             scale= obj.scale,
             creator = obj.creator,
             name = obj.name,
+            akaos = [a.AKAO for a in obj.akaos],
             entities= [
                 Entity(
                     name=obj.entities[i],
-                    scripts=obj.entityScripts[i]
+                    scripts=[EntityScript(s.offset, s.instructions) for s in obj.entityScripts[i]]
                 ) 
                 for i in range(obj.nbEntities)
             ],
@@ -125,25 +68,6 @@ class Field:
         field = FieldConstruct.parse_stream(stream)
         return cls(field.offsets, script=field.script)
 
-EntityScriptConstruct = EntityScriptAdapter(Struct(
-    "offset" / Int16ul,
-    "entries" / Pointer(
-        lambda ctx: ctx.offset + 28,
-        RepeatUntil(
-            lambda instr, lst, ctx: instr.opcode == 0,
-            Struct(
-                "opcode" / Byte,
-                "mnemonic" / Computed(lambda this: opcodes[this.opcode].name),
-                "operands" / ExprAdapter(
-                    Bytes(lambda ctx: opcodes[ctx.opcode].size >> 3),
-                    decoder = lambda raw, ctx: opcodes[ctx.opcode].bitstruct.parse(raw),
-                    encoder= lambda obj, ctx: opcodes[ctx.opcode].bitstruct.build(obj)
-                )
-            )
-        )
-    )
-))
-
 ScriptConstruct = ScriptAdapter(Struct(
     "start" / Tell,
     Padding(2),
@@ -159,14 +83,23 @@ ScriptConstruct = ScriptAdapter(Struct(
         this.nbEntities,
         PaddedString(8, 'ascii')
     ),
-    "akaoOffsets" / Array(
+    "akaos" / Array(
         this.nbAKAOOffsets,
-        Int32ul
+        Struct(
+            "offset" / Int32ul,
+            "AKAO" / Pointer(lambda ctx: ctx.offset + ctx._.start,AKAOStruct)
+        )
     ),
     "entityScripts" / Array(
         this.nbEntities, Array(
             32,
-            EntityScriptConstruct
+            Struct(
+                "offset" / Int16ul,
+                "instructions" / Pointer(
+                    lambda ctx: ctx.offset + ctx._.start,
+                    RepeatUntil(lambda obj, lst, ctx: obj.id == 0, FieldOpcodeConstruct)
+                )
+            )
         )
     ),
     "dialogs" / Pointer(
@@ -198,9 +131,8 @@ FieldConstruct = Struct(
     "script"/ ScriptConstruct
 )
 
-with open("FieldScriptOpcodes.json", "r", encoding="utf-8") as f:
-    _opcodeslist = load(f)
-opcodes = []
-for opcodedict in _opcodeslist:
-    opcode = Opcode(**opcodedict)
-    opcodes.append(opcode)
+FieldConstruct.compile()
+
+if __name__ == '__main__':
+    f = Field.from_file(r'D:\Temp\Backup PSX\ff7\FIELD\4SBWY_1.DAT')
+    print(f.script)

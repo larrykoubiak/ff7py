@@ -1,4 +1,5 @@
 from json import dump
+from akao import AKAO, AKAOScript
 from field import Field, Entity, EntityScript
 from mim import MIM
 import tkinter as tk
@@ -11,6 +12,8 @@ class FieldForm(tk.Tk):
         self.field: Field = None
         self.entity: Entity = None
         self.entity_script: EntityScript = None
+        self.akao: AKAO = None
+        self.akao_script: AKAOScript = None
         self.mim: MIM = None
         self.image: ImageTk.PhotoImage = None
         self.title("FF7 Field Editor")
@@ -39,7 +42,7 @@ class FieldForm(tk.Tk):
         # MIM
         mim_tab = ttk.Frame(notebook)
         notebook.add(mim_tab, text="MIM")
-        self.buildMIM(tilemap_tab)
+        self.buildMIM(mim_tab)
         #Tilemap
         tilemap_tab = ttk.Frame(notebook)
         notebook.add(tilemap_tab, text="Tilemap")
@@ -51,6 +54,7 @@ class FieldForm(tk.Tk):
         parent.rowconfigure(0, weight=0)
         parent.rowconfigure(1, weight=1)
         parent.rowconfigure(2, weight=1)
+        parent.rowconfigure(3, weight=1)
         parent.columnconfigure(0, weight=1)
         # ──────────────────────────────────────────────────────────────────────
         # Row 0: Header (Scale, Creator, Name)
@@ -123,8 +127,42 @@ class FieldForm(tk.Tk):
         self.entity_scripts_list = tk.Listbox(entity_script_frame)
         self.entity_scripts_list.grid(row=0, column=0, sticky="nsew", padx=5)
         self.entity_scripts_list.bind("<<ListboxSelect>>", self.on_entity_script_selected)
-        self.script_text = tk.Text(entity_script_frame)
-        self.script_text.grid(row=0, column=1, sticky="nsew")
+        self.entity_script_text = tk.Text(entity_script_frame)
+        self.entity_script_text.grid(row=0, column=1, sticky="nsew")
+        # ──────────────────────────────────────────────────────────────────────
+        # Row 3: Scripts / AKAOs
+        # ──────────────────────────────────────────────────────────────────────
+        # ──────────────────────────────────────────────────────────────────────
+        # Row 3: Scripts / AKAOs
+        # ──────────────────────────────────────────────────────────────────────
+        row3 = ttk.Frame(parent)
+        row3.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
+        row3.rowconfigure(0, weight=1)
+        row3.columnconfigure(0, weight=1)
+        row3.columnconfigure(1, weight=2)
+        AKAOs_frame = ttk.LabelFrame(row3, text="AKAOs")
+        AKAOs_frame.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
+        AKAOs_frame.rowconfigure(0, weight=1)
+        AKAOs_frame.columnconfigure(0, weight=1)  # Listbox
+        AKAOs_frame.columnconfigure(1, weight=0)  # Scrollbar
+        scrollakao = tk.Scrollbar(AKAOs_frame, orient=tk.VERTICAL)
+        scrollakao.grid(row=0, column=1, sticky="ns")
+        self.akaos_list = tk.Listbox(
+            AKAOs_frame, yscrollcommand=scrollakao.set
+        )
+        self.akaos_list.grid(row=0, column=0, sticky="nsew")
+        scrollakao.config(command=self.akaos_list.yview)
+        self.akaos_list.bind("<<ListboxSelect>>", self.on_akao_selected)
+        akao_script_frame = ttk.LabelFrame(row3, text="AKAO Scripts")
+        akao_script_frame.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
+        akao_script_frame.rowconfigure(0, weight=1)
+        akao_script_frame.columnconfigure(0, weight=1)
+        akao_script_frame.columnconfigure(1, weight=2)
+        self.akao_scripts_list = tk.Listbox(akao_script_frame)
+        self.akao_scripts_list.grid(row=0, column=0, sticky="nsew", padx=5)
+        self.akao_scripts_list.bind("<<ListboxSelect>>", self.on_akao_script_selected)
+        self.akao_script_text = tk.Text(akao_script_frame)
+        self.akao_script_text.grid(row=0, column=1, sticky="nsew")
 
     def buildMIM(self, parent):
         self.mim_frame = ttk.Label(parent, image=self.image)
@@ -155,6 +193,9 @@ class FieldForm(tk.Tk):
         self.entities_list.delete(0, tk.END)
         for ent in self.field.script.entities:
             self.entities_list.insert(tk.END, ent.name)
+        self.akaos_list.delete(0, tk.END)
+        for akao in self.field.script.akaos:
+            self.akaos_list.insert(tk.END, str(akao.id))
         original_image = self.mim.get_image_data(0)
         self.image = ImageTk.PhotoImage(original_image)
         self.mim_frame.config(image=self.image)
@@ -180,7 +221,7 @@ class FieldForm(tk.Tk):
         self.entity_scripts_list.delete(0, tk.END)
         for script in self.entity.scripts:
             self.entity_scripts_list.insert(tk.END, f"Address {script.address}")
-        self.script_text.delete(1.0, tk.END)
+        self.entity_script_text.delete(1.0, tk.END)
 
     def on_entity_script_selected(self, event):
         selection = event.widget.curselection()
@@ -189,17 +230,39 @@ class FieldForm(tk.Tk):
             return
         index = selection[0]
         self.entity_script = self.entity.scripts[index]
-        self.script_text.delete(1.0, tk.END)
+        self.entity_script_text.delete(1.0, tk.END)
         for opcode in self.entity_script.instructions:
-            self.script_text.insert(tk.END, str(opcode) + "\n")
+            self.entity_script_text.insert(tk.END, str(opcode) + "\n")
+
+    def on_akao_selected(self, event):
+        selection = event.widget.curselection()
+        if not selection:
+            return
+        index = selection[0]
+        self.akao = self.field.script.akaos[index]
+        self.akao_scripts_list.delete(0, tk.END)
+        for script in self.akao.scripts:
+            self.akao_scripts_list.insert(tk.END, f"Address {script.address}")
+        self.akao_script_text.delete(1.0, tk.END)
+
+    def on_akao_script_selected(self, event):
+        selection = event.widget.curselection()
+        if not selection:
+            self.akao_script = None
+            return
+        index = selection[0]
+        self.akao_script = self.akao.scripts[index]
+        self.akao_script_text.delete(1.0, tk.END)
+        for opcode in self.akao_script.instructions:
+            self.akao_script_text.insert(tk.END, str(opcode) + "\n")
 
     def on_label_resize(self, event):
         new_width = event.width
         new_height = event.height
         if self.mim is not None:
             original_image = self.mim.get_image_data(0)
-            new_image = original_image.resize((new_width, new_height),resample=Image.Resampling.NEAREST)
-            self.image = ImageTk.PhotoImage(new_image)
+            original_image.thumbnail((new_width, new_height),resample=Image.Resampling.NEAREST)
+            self.image = ImageTk.PhotoImage(original_image)
             self.mim_frame.config(image=self.image)
 
 if __name__ == '__main__':
