@@ -1,8 +1,8 @@
 from construct import Adapter, Array, BitsInteger, BitStruct, Byte, Computed, Const, ExprAdapter, Padding, RepeatUntil, Pointer, Struct, Tell
 from construct import Int8ul, Int16ul, Int24ul, Int32ul, this
+from constructs.opcodes import Opcode, AKAOOpcodeConstruct
 from dataclasses import dataclass, field
 from datetime import datetime
-from opcodes import Opcode, AKAOOpcodeConstruct
 from typing import List
 
 @dataclass
@@ -58,7 +58,7 @@ AKAOTimestamp = AKAOTimestampAdapter(Struct(
     "second" / BCD
 ))
 
-AKAOStruct = AKAOAdapter(Struct(
+AKAOConstruct = AKAOAdapter(Struct(
     "magic" / Const(b"AKAO"),
     "id" / Int16ul,
     "length" / Int16ul,
@@ -80,8 +80,5 @@ AKAOStruct = AKAOAdapter(Struct(
     )
 ))
 
-AKAOStruct.compile()
-
-if __name__ == '__main__':
-    a = AKAOStruct.parse_file(r"D:\Temp\Backup PSX\ff7\ENEMY6\FAN2.SND")
-    print(a)
+AKAOTimestamp.compile()
+AKAOConstruct.compile()

@@ -1,21 +1,10 @@
-from akao import AKAO, AKAOStruct, AKAOAdapter
 from construct import Adapter, Array,Byte, ExprAdapter, Padding, PaddedString, Pointer, RepeatUntil, Struct, Tell
 from construct import Int8ul, Int16ul, Int32ul, this
+from ..akao import AKAO, AKAOConstruct
+from ..opcodes import Opcode, FieldOpcodeConstruct
 from dataclasses import dataclass
-from enum import IntEnum
-from opcodes import Opcode, FieldOpcodeConstruct
-from typing import List, Optional
-from globals import lzs
+from typing import List
 from utils.ff7text import FF7Text
-
-class FieldOffset(IntEnum):
-    SCRIPT = 0
-    WALKMESH = 1
-    TILEMAP = 2
-    CAMERA_MATRIX = 3
-    TRIGGERS = 4
-    ENCOUNTER = 5
-    MODEL = 6
 
 @dataclass
 class EntityScript:
@@ -55,19 +44,6 @@ class ScriptAdapter(Adapter):
             ]
         )
 
-class Field:
-    def __init__(self, offsets: List[int], script=Script, walkmesh=None, tilemap=None):
-        self.offsets = offsets
-        self.script = script
-        self.walkmesh = walkmesh
-        self.tilemap = tilemap
-
-    @classmethod
-    def from_file(cls, path: str):
-        stream = lzs.un_lzs(path)
-        field = FieldConstruct.parse_stream(stream)
-        return cls(field.offsets, script=field.script)
-
 ScriptConstruct = ScriptAdapter(Struct(
     "start" / Tell,
     Padding(2),
@@ -87,7 +63,7 @@ ScriptConstruct = ScriptAdapter(Struct(
         this.nbAKAOOffsets,
         Struct(
             "offset" / Int32ul,
-            "AKAO" / Pointer(lambda ctx: ctx.offset + ctx._.start,AKAOStruct)
+            "AKAO" / Pointer(lambda ctx: ctx.offset + ctx._.start,AKAOConstruct)
         )
     ),
     "entityScripts" / Array(
@@ -126,13 +102,4 @@ ScriptConstruct = ScriptAdapter(Struct(
     )
 ))
 
-FieldConstruct = Struct(
-    "offsets" / Array(7, Int32ul),
-    "script"/ ScriptConstruct
-)
-
-FieldConstruct.compile()
-
-if __name__ == '__main__':
-    f = Field.from_file(r'D:\Temp\Backup PSX\ff7\FIELD\4SBWY_1.DAT')
-    print(f.script)
+ScriptConstruct.compile()

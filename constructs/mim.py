@@ -50,25 +50,33 @@ class MIM:
     def __init__(self, clut: CLUT, textures: List[Texture]):
         self.clut = clut
         self.textures= textures
+        self.tkimg = None
 
     @classmethod
     def from_file(cls, path: str):
         stream = lzs.un_lzs(path)
-        mim = MIMStruct.parse_stream(stream)
+        mim = MIMConstruct.parse_stream(stream)
         return cls(mim.clut, mim.textures)
 
     def get_image_data(self, palette_id=0):
-        pal = self.clut.palettes[palette_id].getImagePalette()
-        img = Image.new(mode="P",size=(1280,512),color=0)
-        for t in self.textures:
-            data = bytes([byte for value in t.data for byte in value.to_bytes(2, byteorder='little')])
-            ti = Image.frombytes(mode="P", size=(t.width*2,t.height),data=data)
-            img.paste(ti,(t.x*2, t.y))
-        img.putpalette(pal)
-        transparency = self.clut.palettes[palette_id].getTransparenctyIndexes()
-        if transparency is not None:
-            img.info["transparency"] = transparency
-        return img
+        if self.tkimg is None:
+            pal = self.clut.palettes[palette_id].getImagePalette()
+            img = Image.new(mode="RGBA",size=(1024,512),color=(0,0,0,255))
+            for y in range(self.clut.height):
+                for x in range(self.clut.width):
+                    color = tuple(self.clut.palettes[y].entries[x].getColorData())
+                    img.putpixel((self.clut.x + x, self.clut.y + y),color)
+            for t in self.textures:
+                data = bytes([byte for value in t.data for byte in value.to_bytes(2, byteorder='little')])
+                ti = Image.frombytes(mode="P", size=(t.width*2,t.height),data=data)
+                ti.putpalette(pal)
+                transparency = self.clut.palettes[palette_id].getTransparenctyIndexes() or 0
+                if transparency is not None:
+                    ti.info["transparency"] = transparency
+                overlay = ti.convert("RGBA")
+                img.paste(overlay,(t.x*2, t.y), overlay)
+            self.tkimg = img
+        return self.tkimg
 
 class CLUTAdapter(Adapter):
     def _decode(self, obj, context, path):
@@ -102,7 +110,7 @@ class TextureAdapter(Adapter):
             data=obj.data
         )
 
-CLUTStruct = CLUTAdapter(Struct(
+CLUTConstruct = CLUTAdapter(Struct(
     "length" / Int32ul,
     "x" / Int16ul,
     "y" / Int16ul,
@@ -122,7 +130,7 @@ CLUTStruct = CLUTAdapter(Struct(
     )
 ))
 
-TextureStruct = TextureAdapter(Struct(
+TextureConstruct = TextureAdapter(Struct(
     "length" / Int32ul,
     "x" / Int16ul,
     "y" / Int16ul,
@@ -134,7 +142,11 @@ TextureStruct = TextureAdapter(Struct(
     )
 ))
 
-MIMStruct = Struct(
-    "clut" / CLUTStruct,
-    "textures" / GreedyRange(TextureStruct)
+MIMConstruct = Struct(
+    "clut" / CLUTConstruct,
+    "textures" / GreedyRange(TextureConstruct)
 )
+
+CLUTConstruct.compile()
+TextureConstruct.compile()
+MIMConstruct.compile()

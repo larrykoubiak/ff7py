@@ -52,6 +52,13 @@ class FieldOpcodeAdapter(Adapter):
             op.value = obj.operands[op.name]
         return opcode
 
+class AKAOOpcodeAdapter(Adapter):
+    def _decode(self, obj, context, path):
+        opcode: Opcode = deepcopy(akaoOpcodes[obj.opcode])
+        for op in opcode.operands:
+            op.value = obj.operands[op.name]
+        return opcode
+
 FieldOpcodeConstruct = FieldOpcodeAdapter(
     Struct(
         "opcode" / Byte,
@@ -64,13 +71,6 @@ FieldOpcodeConstruct = FieldOpcodeAdapter(
     )
 )
 
-class AKAOOpcodeAdapter(Adapter):
-    def _decode(self, obj, context, path):
-        opcode: Opcode = deepcopy(akaoOpcodes[obj.opcode])
-        for op in opcode.operands:
-            op.value = obj.operands[op.name]
-        return opcode
-
 AKAOOpcodeConstruct = AKAOOpcodeAdapter(
     Struct(
         "opcode" / Byte,
@@ -82,6 +82,9 @@ AKAOOpcodeConstruct = AKAOOpcodeAdapter(
         )
     )
 )
+
+FieldOpcodeConstruct.compile()
+AKAOOpcodeConstruct.compile()
 
 with open("FieldScriptOpcodes.json", "r", encoding="utf-8") as f:
     _fieldopcodes = load(f)

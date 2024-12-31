@@ -1,10 +1,53 @@
 from json import dump
-from akao import AKAO, AKAOScript
-from field import Field, Entity, EntityScript
-from mim import MIM
-import tkinter as tk
+from constructs.akao import AKAO, AKAOScript
+from constructs.field import Field, Entity, EntityScript, Walkmesh, Camera
+from constructs.mim import MIM
+from pyopengltk import OpenGLFrame
+from OpenGL.GL import *
+from OpenGL.GLU import *
 from tkinter import ttk, filedialog
 from PIL import ImageTk, Image
+import math
+import tkinter as tk
+
+class WalkmeshFrame(OpenGLFrame):
+    def __init__(self, *args, **kw):
+        super().__init__(*args, **kw)
+        self.walkmesh: Walkmesh = None
+        self.camera: Camera = None
+
+    def set_walkmesh_camera(self, walkmesh, camera):
+        self.walkmesh = walkmesh
+        self.camera = camera
+
+    def initgl(self):
+        glClearColor(0.2, 0.2, 0.2, 1.0)
+        glEnable(GL_DEPTH_TEST)
+
+    def redraw(self):
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluPerspective(60.0, self.width / float(self.height), 0.1, 100.0)
+
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+        if self.walkmesh:
+            gluLookAt(
+                self.camera.tx, self.camera.ty, self.camera.tz,
+                self.camera.tx + self.camera.axis_z.x, self.camera.ty + self.camera.axis_z.y, self.camera.tz + self.camera.axis_z.z,
+                self.camera.axis_y.x, self.camera.axis_y.y, self.camera.axis_y.z
+            )
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
+            glColor3f(1.0, 1.0, 1.0)  # White lines
+            glBegin(GL_TRIANGLES)
+            for t in self.walkmesh.triangles:
+                for v in t.vertices:
+                    glVertex3f(v.x / 4096, v.y / 4096, v.z / 4096)
+            glEnd()
+            # Restore to fill mode if you plan to draw something else
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
 
 class FieldForm(tk.Tk):
     def __init__(self, screenName = None, baseName = None, className = "Tk", useTk = True, sync = False, use = None):
@@ -17,7 +60,7 @@ class FieldForm(tk.Tk):
         self.mim: MIM = None
         self.image: ImageTk.PhotoImage = None
         self.title("FF7 Field Editor")
-        self.geometry("976x534")
+        self.geometry("1024x534")
         self.buildMenu() # Config Menu
         self.buildTabs() # Tab Controls
 
@@ -30,22 +73,23 @@ class FieldForm(tk.Tk):
         self.config(menu=menubar)
 
     def buildTabs(self):
-        notebook = ttk.Notebook(self)
-        notebook.pack(fill=tk.BOTH, expand=True)
+        self.notebook = ttk.Notebook(self)
+        self.notebook.pack(fill=tk.BOTH, expand=True)
         # Script
-        script_tab = ttk.Frame(notebook)
-        notebook.add(script_tab, text="Script")
+        script_tab = ttk.Frame(self.notebook)
+        self.notebook.add(script_tab, text="Script")
         self.buildScript(script_tab)
         # Mesh
-        mesh_tab = ttk.Frame(notebook)
-        notebook.add(mesh_tab, text="Mesh")
+        mesh_tab = ttk.Frame(self.notebook)
+        self.notebook.add(mesh_tab, text="Mesh")
+        self.buildMesh(mesh_tab)
         # MIM
-        mim_tab = ttk.Frame(notebook)
-        notebook.add(mim_tab, text="MIM")
+        mim_tab = ttk.Frame(self.notebook)
+        self.notebook.add(mim_tab, text="MIM")
         self.buildMIM(mim_tab)
         #Tilemap
-        tilemap_tab = ttk.Frame(notebook)
-        notebook.add(tilemap_tab, text="Tilemap")
+        tilemap_tab = ttk.Frame(self.notebook)
+        self.notebook.add(tilemap_tab, text="Tilemap")
 
     def buildScript(self, parent):
         """
@@ -169,6 +213,10 @@ class FieldForm(tk.Tk):
         self.mim_frame.pack(fill=tk.BOTH, expand=True)
         self.mim_frame.bind("<Configure>", self.on_label_resize)
 
+    def buildMesh(self, parent):
+        self.ogl_frame = WalkmeshFrame(parent, width=1024, height=512)
+        self.ogl_frame.pack(fill=tk.BOTH, expand=True)
+        self.ogl_frame.animate = 0
     def openfile(self):
         filepath = filedialog.askopenfilename(title="FF7 Field DAT", filetypes=[("DAT Files", "*.DAT")])
         if not filepath:
@@ -198,7 +246,9 @@ class FieldForm(tk.Tk):
             self.akaos_list.insert(tk.END, str(akao.id))
         original_image = self.mim.get_image_data(0)
         self.image = ImageTk.PhotoImage(original_image)
-        self.mim_frame.config(image=self.image)
+        self.resize_mim(self.winfo_width(), self.winfo_height()-32)
+        self.ogl_frame.set_walkmesh_camera(self.field.walkmesh, self.field.camera)
+        self.ogl_frame.animate = 1
 
     def on_dialog_selected(self, event):
         selection = event.widget.curselection()
@@ -257,13 +307,22 @@ class FieldForm(tk.Tk):
             self.akao_script_text.insert(tk.END, str(opcode) + "\n")
 
     def on_label_resize(self, event):
-        new_width = event.width
-        new_height = event.height
+        max_width = event.width
+        max_height = event.height
         if self.mim is not None:
-            original_image = self.mim.get_image_data(0)
-            original_image.thumbnail((new_width, new_height),resample=Image.Resampling.NEAREST)
-            self.image = ImageTk.PhotoImage(original_image)
-            self.mim_frame.config(image=self.image)
+            self.resize_mim(max_width, max_height)
+
+    def resize_mim(self, max_width, max_height):
+        original_image = self.mim.get_image_data(0)
+        ow, oh = original_image.size
+        width_ratio = max_width / ow
+        height_ratio = max_height / oh
+        scale_factor = min(width_ratio, height_ratio)
+        new_width = int(ow * scale_factor)
+        new_height = int(oh * scale_factor)
+        new_image = original_image.resize((new_width, new_height),resample=Image.Resampling.LANCZOS)
+        self.image = ImageTk.PhotoImage(new_image)
+        self.mim_frame.config(image=self.image)
 
 if __name__ == '__main__':
     app = FieldForm()
