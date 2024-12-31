@@ -1,6 +1,6 @@
 from json import dump
 from constructs.akao import AKAO, AKAOScript
-from constructs.field import Field, Entity, EntityScript, Walkmesh, Camera
+from constructs.field import Field, Entity, EntityScript, Walkmesh, Camera, Tilemap
 from constructs.mim import MIM
 from pyopengltk import OpenGLFrame
 from OpenGL.GL import *
@@ -29,7 +29,12 @@ class WalkmeshFrame(OpenGLFrame):
 
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        gluPerspective(60.0, self.width / float(self.height), 0.1, 100.0)
+        gluPerspective(
+            70,
+            self.width / float(self.height), 
+            0.001, 
+            1000.0
+        )
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
@@ -58,7 +63,8 @@ class FieldForm(tk.Tk):
         self.akao: AKAO = None
         self.akao_script: AKAOScript = None
         self.mim: MIM = None
-        self.image: ImageTk.PhotoImage = None
+        self.mim_image: ImageTk.PhotoImage = None
+        self.tilemap_image: ImageTk.PhotoImage = None
         self.title("FF7 Field Editor")
         self.geometry("1024x534")
         self.buildMenu() # Config Menu
@@ -90,6 +96,7 @@ class FieldForm(tk.Tk):
         #Tilemap
         tilemap_tab = ttk.Frame(self.notebook)
         self.notebook.add(tilemap_tab, text="Tilemap")
+        self.buildTilemap(tilemap_tab)
 
     def buildScript(self, parent):
         """
@@ -209,7 +216,7 @@ class FieldForm(tk.Tk):
         self.akao_script_text.grid(row=0, column=1, sticky="nsew")
 
     def buildMIM(self, parent):
-        self.mim_frame = ttk.Label(parent, image=self.image)
+        self.mim_frame = ttk.Label(parent, image=self.mim_image)
         self.mim_frame.pack(fill=tk.BOTH, expand=True)
         self.mim_frame.bind("<Configure>", self.on_label_resize)
 
@@ -217,6 +224,12 @@ class FieldForm(tk.Tk):
         self.ogl_frame = WalkmeshFrame(parent, width=1024, height=512)
         self.ogl_frame.pack(fill=tk.BOTH, expand=True)
         self.ogl_frame.animate = 0
+
+    def buildTilemap(self, parent):
+        self.tilemap_frame = ttk.Label(parent, image=self.mim_image)
+        self.tilemap_frame.pack(fill=tk.BOTH, expand=True)
+        self.tilemap_frame.bind("<Configure>", self.on_label_resize)
+
     def openfile(self):
         filepath = filedialog.askopenfilename(title="FF7 Field DAT", filetypes=[("DAT Files", "*.DAT")])
         if not filepath:
@@ -245,10 +258,13 @@ class FieldForm(tk.Tk):
         for akao in self.field.script.akaos:
             self.akaos_list.insert(tk.END, str(akao.id))
         original_image = self.mim.get_image_data(0)
-        self.image = ImageTk.PhotoImage(original_image)
+        self.mim_image = ImageTk.PhotoImage(original_image)
         self.resize_mim(self.winfo_width(), self.winfo_height()-32)
         self.ogl_frame.set_walkmesh_camera(self.field.walkmesh, self.field.camera)
         self.ogl_frame.animate = 1
+        original_image = self.field.tilemap.get_image_data(self.mim)
+        self.tilemap_image = ImageTk.PhotoImage(original_image)
+        self.resize_tilemap(self.winfo_width(), self.winfo_height()-32)
 
     def on_dialog_selected(self, event):
         selection = event.widget.curselection()
@@ -321,8 +337,20 @@ class FieldForm(tk.Tk):
         new_width = int(ow * scale_factor)
         new_height = int(oh * scale_factor)
         new_image = original_image.resize((new_width, new_height),resample=Image.Resampling.LANCZOS)
-        self.image = ImageTk.PhotoImage(new_image)
-        self.mim_frame.config(image=self.image)
+        self.mim_image = ImageTk.PhotoImage(new_image)
+        self.mim_frame.config(image=self.mim_image)
+
+    def resize_tilemap(self, max_width, max_height):
+        original_image = self.field.tilemap.get_image_data(self.mim)
+        ow, oh = original_image.size
+        width_ratio = max_width / ow
+        height_ratio = max_height / oh
+        scale_factor = min(width_ratio, height_ratio)
+        new_width = int(ow * scale_factor)
+        new_height = int(oh * scale_factor)
+        new_image = original_image.resize((new_width, new_height),resample=Image.Resampling.LANCZOS)
+        self.tilemap_image = ImageTk.PhotoImage(new_image)
+        self.tilemap_frame.config(image=self.tilemap_image)
 
 if __name__ == '__main__':
     app = FieldForm()

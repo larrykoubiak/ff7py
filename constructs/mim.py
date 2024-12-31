@@ -26,9 +26,14 @@ class Palette:
         pal = ImagePalette.ImagePalette(mode="rgb", palette=data)
         return pal
 
-    def getTransparenctyIndexes(self):
-        indexes = [i for i in range(self.width) if self.entries[i].stp]
-        return None if len(indexes) == 0 else indexes[0]
+    def getAlphaMasks(self):
+        alpha_mask = [255] * self.width
+        for i in range(self.width):
+            if self.entries[i].red == 0 and self.entries[i].green == 0 and self.entries[i].blue == 0:
+                alpha_mask[i] = 255 if self.entries[i].stp else 0
+            else:
+                alpha_mask[i] = 0 if self.entries[i].stp else 255
+        return bytes(alpha_mask)
 
 @dataclass
 class CLUT:
@@ -58,6 +63,23 @@ class MIM:
         mim = MIMConstruct.parse_stream(stream)
         return cls(mim.clut, mim.textures)
 
+    def get_tile_data(self, palette_id, page_x, page_y, tex_source_x, tex_source_y, width=8, height=16):
+        pal = self.clut.palettes[palette_id].getImagePalette()
+        transparency = self.clut.palettes[palette_id].getAlphaMasks()
+        texture = self.textures[page_y]
+        data = []
+        for y in range(height):
+            source_y = tex_source_y + y
+            source_x = (tex_source_x >> 1) + ((page_x * 64) - texture.x)
+            offset = (source_y * texture.width) + source_x
+            data.extend([b for value in texture.data[offset:offset + width] for b in value.to_bytes(2, byteorder='little')])
+        tileimg = Image.frombytes(mode="P", size=(width*2, height), data=bytes(data))
+        tileimg.putpalette(pal)
+        if transparency is not None:
+            tileimg.info["transparency"] = transparency
+        result = tileimg.convert("RGBA")
+        return result
+
     def get_image_data(self, palette_id=0):
         if self.tkimg is None:
             pal = self.clut.palettes[palette_id].getImagePalette()
@@ -70,7 +92,7 @@ class MIM:
                 data = bytes([byte for value in t.data for byte in value.to_bytes(2, byteorder='little')])
                 ti = Image.frombytes(mode="P", size=(t.width*2,t.height),data=data)
                 ti.putpalette(pal)
-                transparency = self.clut.palettes[palette_id].getTransparenctyIndexes() or 0
+                transparency = self.clut.palettes[palette_id].getAlphaMasks()
                 if transparency is not None:
                     ti.info["transparency"] = transparency
                 overlay = ti.convert("RGBA")
