@@ -97,6 +97,8 @@ class MIM:
                     ti.info["transparency"] = transparency
                 overlay = ti.convert("RGBA")
                 img.paste(overlay,(t.x*2, t.y), overlay)
+                del ti
+                del overlay
             self.tkimg = img
         return self.tkimg
 

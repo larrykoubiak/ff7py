@@ -61,8 +61,11 @@ class Tilemap:
                 elif tpi.blending_mode == 2:
                     blended = ImageChops.subtract(src_tile, tileimg)
                 img.paste(blended,(dest_x, dest_y))
+                del src_tile
+                del blended
             else:
                 img.paste(tileimg,(dest_x,dest_y), tileimg)
+            del tileimg
         return img
 
 class TilemapAdapter(Adapter):
@@ -94,13 +97,13 @@ class TilemapAdapter(Adapter):
         page_tiles = []
         for p in obj.background_tiles:
             if p.info.type != 0x7FFE:
-                page_tiles.extend(p.tiles)
+                page_tiles.extend([(p.info,t) for t in p.tiles])
             else:
                 tp = texture_pages[p.info.pos]
                 background_tiles.extend([
-                    TileInfo(p.info.pos, p.info.type, t.destination_x, t.destination_y, t.tex_page_source_x, t.tex_page_source_y, t.tile_clut_data.clut_number,
+                    TileInfo(i.pos, i.type, t.destination_x, t.destination_y, t.tex_page_source_x, t.tex_page_source_y, t.tile_clut_data.clut_number,
                             obj.texture_page_data[p.info.pos],None, None,None, None)
-                    for t in page_tiles
+                    for i, t in page_tiles
                 ])
                 page_tiles = []
 
@@ -115,11 +118,21 @@ class TilemapAdapter(Adapter):
                     t.group, t.parameter.blending, t.parameter.param_id, t.state)
             for p in obj.sprite_tiles for t in p.tiles
         ]
-        extra_tiles = [
-            TileInfo(p.info.pos, p.info.type, t.destination_x, t.destination_y, t.tex_page_source_x, t.tex_page_source_y, t.tile_clut_data.clut_number,
-                    None,None, t.parameter.blending, t.parameter.param_id, t.state)
-            for p in obj.extra_tiles for t in p.tiles
-        ]
+
+        extra_tiles = []
+        page_tiles = []
+        for p in obj.extra_tiles:
+            if p.info.type != 0x7FFE:
+                page_tiles.extend([(p.info,t) for t in p.tiles])
+            else:
+                tp = texture_pages[p.info.pos]
+                extra_tiles.extend([
+                    TileInfo(i.pos, i.type, t.destination_x, t.destination_y, t.tex_page_source_x, t.tex_page_source_y, t.tile_clut_data.clut_number,
+                            obj.texture_page_data[p.info.pos],None, t.parameter.blending, t.parameter.param_id, t.state)
+                    for i, t in page_tiles
+                ])
+                page_tiles = []
+
         return Tilemap(min_x,min_y,(max_x - min_x + 16),(max_y - min_y + 16),background_tiles,texture_pages,sprite_tiles,extra_tiles)
 
 CLUTDataConstruct = ByteSwapped(
@@ -205,7 +218,7 @@ TilemapConstruct = TilemapAdapter(Struct(
     "extra_tiles" / Array(
         lambda ctx: len(ctx.layer_infos[2]) - 1,
         Struct(
-            "info" / Computed(lambda ctx: ctx._.layer_infos[1][ctx._index]),
+            "info" / Computed(lambda ctx: ctx._.layer_infos[2][ctx._index]),
             "tiles" / Array(
                 lambda ctx: ctx.info.count,
                 Struct(

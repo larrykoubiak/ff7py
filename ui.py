@@ -257,13 +257,9 @@ class FieldForm(tk.Tk):
         self.akaos_list.delete(0, tk.END)
         for akao in self.field.script.akaos:
             self.akaos_list.insert(tk.END, str(akao.id))
-        original_image = self.mim.get_image_data(0)
-        self.mim_image = ImageTk.PhotoImage(original_image)
         self.resize_mim(self.winfo_width(), self.winfo_height()-32)
         self.ogl_frame.set_walkmesh_camera(self.field.walkmesh, self.field.camera)
         self.ogl_frame.animate = 1
-        original_image = self.field.tilemap.get_image_data(self.mim)
-        self.tilemap_image = ImageTk.PhotoImage(original_image)
         self.resize_tilemap(self.winfo_width(), self.winfo_height()-32)
 
     def on_dialog_selected(self, event):
